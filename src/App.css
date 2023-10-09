@@ -1,48 +1,115 @@
-.App {
-  text-align: center;
-}
-
 html, body {
   width: 100%;
   height: 100%;
   background-color: #c0c0c0;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+#root {
+  width: 100%;
+  font-family: monospace;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.wrapper {
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .search-div {
-  
+  justify-content: center;
+  align-items: end;
+  gap: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search {
+  font-size: 18px;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.search input {
+  width: 150px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+}
+
+.find-button {
+  background-color: #0d6efd;
+  border: none;
+  outline: none;
+  width: 80px;
+  height: 48px;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.card {
+  width: 500px;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.card-header {
+  height: 60px;
+  align-items: center;
+  font-size: 32px;
+  gap: 10px;
+}
+
+.id {
+  font-size: 32px;
+  color: white;
+  background-color: black;
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+}
+
+.hero-infos {
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.hero-img {
+  width: 49%;
+}
+
+.hero-img img {
+  width: 100%;
+}
+
+.hero-stats {
+  width: 49%;  
+  gap: 10px;
+  flex-direction: column;
+}
+
+.stat {
+  width: 100%;
+  font-size: 18px;
+}
+
+.stat .bar {
+  margin-top: 5px;
+  width: 100%;
+  height: 15px;
+  background-color: #a0a0a0;
+  border-radius: 20px;
+}
+
+.stat .bar-filler {
+  height: 100%;
+  border-radius: 20px;
 }
