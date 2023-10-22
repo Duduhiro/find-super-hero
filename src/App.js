@@ -1,82 +1,88 @@
+import React, { useState } from 'react';
+import './reset.css'
+import './index.css'
 import './App.css';
-import './reset.css';
-import React, { useState, useEffect } from 'react';
 import { fetchSH } from './SearchHero';
 
 function App() {
+  
   return (
-    <div className="d-flex wrapper">
-      <Search />
-      <Card />
-    </div>
+    <>
+      <SuperHeroCard />
+    </>
   );
 }
 
-function Search(props) {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleButtonClick = () => {
-    // Call the fetchSH function with the inputValue
-  };
-
-  return(
-    <div className="d-flex search-div">
-      <div className="d-flex search">
-        <h1>Search a hero</h1>
-        <input type="text" value={inputValue} onChange={handleInputChange} placeholder="Search" />
-      </div>
-      <button onClick={handleButtonClick} className="find-button">Find</button>   
-    </div>
-  );
-}
-
-function Card() {
-
-  const [stats, setStats] = useState({
-    intelligence: 0,
-    strength: 0,
-    speed: 0,
-    durability: 0,
-    power: 0,
-    combat: 0
-  });
-
-  // Fetch data using fetchSH and update stats state accordingly
-
-  const fetchData = async () => {
-    try {
-      const data = await fetchSH('batman'); // Assuming fetchSH returns an object with stat values
-      setStats(data.results[0].powerstats); // Update stats state with fetched data
-    } catch (error) {
-      console.error('Error fetching data:', error);
+function SuperHeroCard(props) {
+  const [hero, setHero] = useState(
+    {
+      'id': 0,
+      'name': '',
+      'intelligence': '0',
+      'strength': '0',
+      'speed': '0',
+      'durability': '0',
+      'power': '0',
+      'combat': '0',
+      'image': ''
     }
-  };
+  )
 
-  useEffect(() => {
-    fetchData(); // Fetch data when the component mounts (or based on your logic)
-  }, []);
+  let superHeroName = ''
 
-  return(
-    <div className="card">
-      <div className="d-flex card-header">
-        <p className="id">1</p>
-        <p>Batman</p>
+  const handleInputChange = (event) => {
+    superHeroName = (event.target.value);
+  }
+
+  const findHero = async () => {
+    const stats = await fetchSH(superHeroName);
+    if (stats.response === 'error') {
+      alert('Hero not found');
+      return;
+    }
+    setHero({
+      'id': stats.results[0].id,
+      'name': stats.results[0].name,
+      'intelligence': stats.results[0].powerstats.intelligence,
+      'strength': stats.results[0].powerstats.strength,
+      'speed': stats.results[0].powerstats.speed,
+      'durability': stats.results[0].powerstats.durability,
+      'power': stats.results[0].powerstats.power,
+      'combat': stats.results[0].powerstats.combat,
+      'image': stats.results[0].image.url
+    });
+  }
+
+  return (
+    <div className='app'>
+      <div>
+        <input id="heroInput" placeholder='Find Super Hero' onChange={handleInputChange} type='text' ref={props.inputRef} />
+        <button id="findSH-button" onClick={() => findHero()}>Find</button>
       </div>
-      <div className="d-flex hero-infos">
-        <div className="hero-img">
-          <img src="https:\/\/www.superherodb.com\/pictures2\/portraits\/10\/100\/639.jpg" alt="sei la"/>
+      <Card hero={hero} />
+    </div>
+    
+  );
+}
+
+function Card(props) {
+  return (
+    <div className='card'>
+      <div className='card-header'>
+        <p className='hero-id'>{props.hero.id}</p>
+        <p>{props.hero.name}</p>
+      </div>
+      <div className='card-info'>
+        <div className='hero-img-wrapper'>
+          <img src={props.hero.image} alt='hero-img'/>
         </div>
-        <div className="d-flex hero-stats">
-          <Stat statName="Intelligence" statPercent={stats.intelligence} statColor="red" />
-          <Stat statName="Strength" statPercent={stats.strength} statColor="green" />
-          <Stat statName="Speed" statPercent={stats.speed} statColor="yellow" />
-          <Stat statName="Durability" statPercent={stats.durability} statColor="purple" />
-          <Stat statName="Power" statPercent={stats.power} statColor="pink" />
-          <Stat statName="Combat" statPercent={stats.combat} statColor="blue" />
+        <div className='hero-stats'>
+          <Stat statName="Intelligence" width={props.hero.intelligence} />
+          <Stat statName="Strength" width={props.hero.strength} color="green" />
+          <Stat statName="Speed" width={props.hero.speed} color="yellow" />
+          <Stat statName="Durability" width={props.hero.durability} color="pink" />
+          <Stat statName="Power" width={props.hero.power} color="blue" />
+          <Stat statName="Combat" width={props.hero.combat} color="purple" />
         </div>
       </div>
     </div>
@@ -84,13 +90,11 @@ function Card() {
 }
 
 function Stat(props) {
-  
-  return(
-    <div className="stat">
-      <p>{ props.statName }</p>
-      <div className="bar">
-        <div style={{width:props.statPercent + '%', backgroundColor:props.statColor}} className="bar-filler">
-        </div>
+  return (
+    <div className='stat'>
+      <p>{props.statName}</p>
+      <div className='out-bar'>
+        <div className='filler' style={{width: props.width + '%', backgroundColor: props.color}}></div>
       </div>
     </div>
   );

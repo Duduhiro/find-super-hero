@@ -1,115 +1,122 @@
-html, body {
+body, html {
   width: 100%;
   height: 100%;
-  background-color: #c0c0c0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background-color: #d0d0d0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #root {
   width: 100%;
-  font-family: monospace;
+  height: 100%;
 }
 
-.d-flex {
+.app {
   display: flex;
-}
-
-.wrapper {
-  width: 100%;
-  justify-content: space-evenly;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
 }
 
-.search-div {
-  justify-content: center;
-  align-items: end;
-  gap: 10px;
-}
-
-.search {
-  font-size: 18px;
-  gap: 5px;
-  flex-direction: column;
-}
-
-.search input {
-  width: 150px;
-  height: 30px;
-  border: none;
-  border-radius: 5px;
-}
-
-.find-button {
-  background-color: #0d6efd;
-  border: none;
+#heroInput {
+  width: 300px;
   outline: none;
-  width: 80px;
+  border: none;
   height: 48px;
-  font-size: 16px;
-  color: #fff;
-  border-radius: 6px;
+  border-radius: 15px;
+  font-size: 24px;
+  padding: 10px;
+}
+
+#findSH-button {
+  width: 100px;
+  background-color: #007bff;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  height: 36px;
+  margin-left: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 5px 1px rgba(168,168,168,1);
+}
+
+#findSH-button:hover {
+  cursor: pointer;
+  background-color: #0069d9;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   width: 500px;
-  padding: 15px;
-  border-radius: 15px;
-  background-color: #fff;
+  background-color: white;
+  padding: 10px;
 }
 
 .card-header {
-  height: 60px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  font-size: 24px;
   align-items: center;
-  font-size: 32px;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
-.id {
-  font-size: 32px;
-  color: white;
+.hero-id {
+  height: 48px;
+  width: 48px;
   background-color: black;
-  width: 60px;
-  height: 60px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: white;
   display: grid;
   place-items: center;
-  border-radius: 100%;
 }
 
-.hero-infos {
+.card-info {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 15px;
 }
 
-.hero-img {
+.hero-img-wrapper {
   width: 49%;
+
 }
 
-.hero-img img {
+.hero-img-wrapper img {
   width: 100%;
 }
 
 .hero-stats {
-  width: 49%;  
-  gap: 10px;
+  width: 49%;
+  display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .stat {
-  width: 100%;
-  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.stat .bar {
-  margin-top: 5px;
+.out-bar {
+  height: 20px;
   width: 100%;
-  height: 15px;
   background-color: #a0a0a0;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
-.stat .bar-filler {
+.filler {
   height: 100%;
-  border-radius: 20px;
+  width: 50%;
+  background-color: #ff0000;
+  border-radius: inherit;
+  transition: 1s ease-in-out;
 }
